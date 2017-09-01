@@ -30,7 +30,5 @@ In R:
 
 ##### library(devtools)
 
-##### TOKEN <- c("7eec33dedd0291418c5e4879b5e323ccc48386b4")
-
-##### install_github(repo="HAOYU-LI/UniDOE_src", auth_token=TOKEN)
+##### install_github(repo="HAOYU-LI/UniDOE")
 
