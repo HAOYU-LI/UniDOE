@@ -3,8 +3,8 @@ title: "UniDOE Vignette"
 author: "Aijun Zhang and Haoyu Li"
 date: "August 30, 2017"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 > [Introduction](#intro)
@@ -51,7 +51,7 @@ library(devtools)
 install_github(repo="HAOYU-LI/UniDOE")
 ```
 
-Source code for UniDOE is not published, but users can get access to R source code and install from github. Details and examples for utilizing install_github can be retrieved from its function documentation
+Source code for UniDOE is not published, but users can get access to R code and install from github. Details and examples for utilizing install_github can be retrieved from its function documentation
 
 ```{r, eval=FALSE}
 help(install_github)
@@ -254,13 +254,14 @@ $vis$ :
 
 Uniform Design Construction function is devised to perform element-wise exchange with stochastic evolutionary algorithm to find a better design of experiments. Users can choose to manually input or random generate initial matrix. Details can be viewed in UDC function documentation:
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 library(UniDOE)
 ?UDC
 ```
 
 For instance, if we desire to optimize an randomly generated design with n=12,s=3,q=4
 ```{r, eval=TRUE}
+library(UniDOE)
 n=12
 s=3
 q=4
