@@ -11,7 +11,7 @@
 
 <meta name="author" content="Aijun Zhang and Haoyu Li" />
 
-<meta name="date" content="2017-08-22" />
+<meta name="date" content="2017-08-30" />
 
 <title>UniDOE Vignette</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">UniDOE Vignette</h1>
 <h4 class="author"><em>Aijun Zhang and Haoyu Li</em></h4>
-<h4 class="date"><em>August 22, 2017</em></h4>
+<h4 class="date"><em>August 30, 2017</em></h4>
 
 </div>
 
@@ -164,9 +164,8 @@ D(X^*) = min_{X\in Z}D(X)
 <h4>Dependencies: 32-bit R(&gt;3.4.1), Rtools(&gt;=3.4), devtools</h4>
 <p>The simplest way to use UniDOE is to install from github:</p>
 <pre class="r"><code>library(devtools)
-TOKEN = ...(contact author)
-install_github(repo=&quot;HAOYU-LI/UniDOE_src&quot;, auth_token=TOKEN)</code></pre>
-<p>Source code for UniDOE is not published, if users are going to get access to R source code and install from github, please contact author to obtain the token. Details and examples for utilizing install_github can be retrieved from its function documentation</p>
+install_github(repo=&quot;HAOYU-LI/UniDOE&quot;)</code></pre>
+<p>Source code for UniDOE is not published, but users can get access to R code and install from github. Details and examples for utilizing install_github can be retrieved from its function documentation</p>
 <pre class="r"><code>help(install_github)</code></pre>
 <p>Alternatively, it’s also convenient to clone the binary source package from author’s github page(e.g. <a href="https://github.com/HAOYU-LI/UniDOE" class="uri">https://github.com/HAOYU-LI/UniDOE</a>) and install it from R command line:</p>
 <pre class="r"><code>install.packages(file.choose(),repos=NULL)</code></pre>
@@ -297,11 +296,11 @@ d(x_i,x_j) = [\sum_{k=1}^{s}|x_{ik}-x_{jk}|^m]^\frac{1}{m}
 <p><span class="math inline">\(crit\)</span> :</p>
 <pre><code>a character R object. Type of objetive function to use.
   
-&quot;maximin&quot; – maximin Discrepancy ;
+&quot;maximin&quot; â maximin Discrepancy ;
   
-&quot;CL2&quot; –Centered L2 Discrepancy ;
+&quot;CL2&quot; âCentered L2 Discrepancy ;
   
-&quot;MD2&quot; –Mixture L2 Discrepancy ;
+&quot;MD2&quot; âMixture L2 Discrepancy ;
    </code></pre>
 <p><span class="math inline">\(maxiter\)</span> :</p>
 <pre><code>maximum iteration numbers in updating the design.(default: 10^5)</code></pre>
@@ -348,50 +347,50 @@ In exploration process, the design has reached local minimum and threshold is ad
 <p>Uniform Design Construction function is devised to perform element-wise exchange with stochastic evolutionary algorithm to find a better design of experiments. Users can choose to manually input or random generate initial matrix. Details can be viewed in UDC function documentation:</p>
 <pre class="r"><code>library(UniDOE)
 ?UDC</code></pre>
-<pre><code>## starting httpd help server ... done</code></pre>
 <p>For instance, if we desire to optimize an randomly generated design with n=12,s=3,q=4</p>
-<pre class="r"><code>n=12
+<pre class="r"><code>library(UniDOE)
+n=12
 s=3
 q=4
 crit = &quot;MD2&quot; #(default is MD2)
 list0 = UDC(n,s,q,crit=crit)</code></pre>
 <pre class="r"><code>list0$Init_Matrix</code></pre>
 <pre><code>##       [,1] [,2] [,3]
-##  [1,]    1    2    2
-##  [2,]    1    3    3
-##  [3,]    2    1    4
-##  [4,]    3    3    3
-##  [5,]    3    2    4
-##  [6,]    4    1    1
-##  [7,]    4    2    4
-##  [8,]    2    4    2
-##  [9,]    3    3    1
-## [10,]    1    1    3
-## [11,]    4    4    1
-## [12,]    2    4    2</code></pre>
+##  [1,]    3    4    1
+##  [2,]    4    2    3
+##  [3,]    2    4    4
+##  [4,]    3    1    1
+##  [5,]    2    2    4
+##  [6,]    3    1    3
+##  [7,]    4    4    3
+##  [8,]    2    3    4
+##  [9,]    1    3    2
+## [10,]    1    2    1
+## [11,]    1    1    2
+## [12,]    4    3    2</code></pre>
 <pre class="r"><code>list0$UniDOE_Matrix</code></pre>
 <pre><code>##       [,1] [,2] [,3]
-##  [1,]    1    2    1
-##  [2,]    3    2    2
-##  [3,]    2    2    3
-##  [4,]    3    1    4
-##  [5,]    1    1    3
-##  [6,]    4    3    4
-##  [7,]    4    4    2
-##  [8,]    2    3    2
-##  [9,]    4    1    1
-## [10,]    3    3    3
-## [11,]    1    4    4
-## [12,]    2    4    1</code></pre>
+##  [1,]    3    4    1
+##  [2,]    3    3    2
+##  [3,]    1    1    2
+##  [4,]    4    1    1
+##  [5,]    3    2    3
+##  [6,]    4    4    3
+##  [7,]    1    3    1
+##  [8,]    4    2    4
+##  [9,]    1    4    4
+## [10,]    2    1    4
+## [11,]    2    3    3
+## [12,]    2    2    2</code></pre>
 <pre class="r"><code>list0$obj0</code></pre>
-<pre><code>## [1] 0.07009916</code></pre>
+<pre><code>## [1] 0.06872311</code></pre>
 <pre class="r"><code>list0$obj</code></pre>
 <pre><code>## [1] 0.06334396</code></pre>
 <pre class="r"><code>list0$`time(s)`</code></pre>
-<pre><code>## [1] 3.993</code></pre>
+<pre><code>## [1] 4.104</code></pre>
 <pre class="r"><code>list0$obj_list[1:10]</code></pre>
-<pre><code>##  [1] 0.07009916 0.07009916 0.06804685 0.06512797 0.06374641 0.06374641
-##  [7] 0.06392507 0.06350545 0.06365550 0.06358598</code></pre>
+<pre><code>##  [1] 0.06872311 0.06872311 0.06599751 0.06550054 0.06360569 0.06361608
+##  [7] 0.06366249 0.06380745 0.06366249 0.06365656</code></pre>
 <p>Let’s try UDC with a given matrix as initial design. For instance, if we use the design M2 as initial input:</p>
 <pre class="r"><code>n = 24
 q = 3
@@ -427,29 +426,29 @@ list1 = UDC(n,s,q,init=init,initX=M2,crit=crit)</code></pre>
 ## [24,]    3    3    3</code></pre>
 <pre class="r"><code>list1$UniDOE_Matrix</code></pre>
 <pre><code>##       [,1] [,2] [,3]
-##  [1,]    3    1    2
-##  [2,]    2    1    2
-##  [3,]    3    3    1
-##  [4,]    2    2    1
-##  [5,]    1    2    1
-##  [6,]    3    3    2
-##  [7,]    3    1    3
-##  [8,]    2    1    1
-##  [9,]    2    3    1
-## [10,]    1    1    3
-## [11,]    2    3    3
-## [12,]    3    2    3
-## [13,]    1    3    1
-## [14,]    1    2    2
-## [15,]    1    1    2
-## [16,]    2    2    3
-## [17,]    3    2    2
-## [18,]    2    2    2
-## [19,]    2    3    2
-## [20,]    1    1    1
-## [21,]    3    3    3
-## [22,]    1    2    3
-## [23,]    3    1    1
+##  [1,]    1    1    1
+##  [2,]    3    1    2
+##  [3,]    1    1    2
+##  [4,]    1    2    1
+##  [5,]    1    2    3
+##  [6,]    1    3    1
+##  [7,]    1    2    2
+##  [8,]    2    3    2
+##  [9,]    3    2    1
+## [10,]    2    1    3
+## [11,]    2    2    2
+## [12,]    2    2    3
+## [13,]    2    1    2
+## [14,]    3    3    3
+## [15,]    2    3    1
+## [16,]    2    3    3
+## [17,]    3    1    3
+## [18,]    3    3    1
+## [19,]    1    1    3
+## [20,]    3    1    1
+## [21,]    3    2    2
+## [22,]    2    2    1
+## [23,]    3    3    2
 ## [24,]    1    3    3</code></pre>
 <pre class="r"><code>list1$obj0</code></pre>
 <pre><code>## [1] 0.1100073</code></pre>
@@ -516,35 +515,35 @@ list2$Init_Matrix</code></pre>
 ##  [1,]    1    1    1
 ##  [2,]    2    2    2
 ##  [3,]    3    3    3
-##  [4,]    2    1    4
-##  [5,]    4    1    3
-##  [6,]    4    3    4
-##  [7,]    2    2    1
-##  [8,]    3    4    2
-##  [9,]    3    3    3
-## [10,]    1    2    2
-## [11,]    4    2    1
-## [12,]    2    4    4
-## [13,]    1    1    2
-## [14,]    1    4    3
-## [15,]    3    3    1</code></pre>
+##  [4,]    3    2    1
+##  [5,]    4    4    1
+##  [6,]    2    1    3
+##  [7,]    1    3    3
+##  [8,]    2    4    4
+##  [9,]    3    3    2
+## [10,]    4    2    2
+## [11,]    4    3    4
+## [12,]    1    4    3
+## [13,]    3    2    1
+## [14,]    2    1    2
+## [15,]    1    1    4</code></pre>
 <pre class="r"><code>list2$UniDOE_Matrix</code></pre>
 <pre><code>##       [,1] [,2] [,3]
 ##  [1,]    1    1    1
 ##  [2,]    2    2    2
 ##  [3,]    3    3    3
-##  [4,]    2    1    4
-##  [5,]    1    2    3
-##  [6,]    3    2    4
-##  [7,]    2    3    1
-##  [8,]    3    4    1
-##  [9,]    4    3    2
-## [10,]    1    4    2
-## [11,]    4    1    3
-## [12,]    2    4    3
-## [13,]    3    1    2
-## [14,]    1    3    4
-## [15,]    4    2    1</code></pre>
+##  [4,]    2    3    1
+##  [5,]    4    3    2
+##  [6,]    4    1    3
+##  [7,]    1    4    2
+##  [8,]    2    1    4
+##  [9,]    3    1    2
+## [10,]    4    2    1
+## [11,]    3    2    4
+## [12,]    1    2    3
+## [13,]    3    4    1
+## [14,]    2    4    3
+## [15,]    1    3    4</code></pre>
 <p>We can easily observe that first three rows are fixed during optimization process. n represents number of runs for design appended to X0, s must equal to number of columns for X0 and q should also be the same as levels for X0.</p>
 <p>Following example illustrates the usage for user-input initial design:</p>
 <pre class="r"><code>X0 = M1
@@ -627,30 +626,30 @@ list3$Init_Matrix</code></pre>
 ## [22,]    3    3    1
 ## [23,]    3    3    2
 ## [24,]    3    3    3
-## [25,]    1    2    1
+## [25,]    1    1    2
 ## [26,]    1    1    2
-## [27,]    1    1    2
-## [28,]    1    1    1
-## [29,]    1    2    3
+## [27,]    1    1    3
+## [28,]    1    2    1
+## [29,]    3    2    3
 ## [30,]    1    3    1
-## [31,]    1    3    2
-## [32,]    3    3    3
-## [33,]    3    2    3
-## [34,]    2    1    3
-## [35,]    2    3    2
-## [36,]    3    2    1
-## [37,]    2    2    1
-## [38,]    2    1    3
-## [39,]    2    2    2
+## [31,]    2    3    2
+## [32,]    1    2    3
+## [33,]    2    1    3
+## [34,]    2    1    1
+## [35,]    2    3    3
+## [36,]    1    2    2
+## [37,]    2    2    2
+## [38,]    2    1    1
+## [39,]    2    3    1
 ## [40,]    2    3    3
-## [41,]    2    1    1
+## [41,]    3    2    1
 ## [42,]    3    1    2
 ## [43,]    3    1    2
 ## [44,]    3    2    1
-## [45,]    1    2    3
+## [45,]    3    2    3
 ## [46,]    3    3    1
 ## [47,]    3    3    2
-## [48,]    2    3    3</code></pre>
+## [48,]    1    3    3</code></pre>
 <p>In this case, X0 ,i.e. M1, is fixed during searching process. initX,i.e.M2, is concatenated to X0 by row and is updated in searching. n,s,q are not required if init=“input”.</p>
 <p><a id="lp"></a></p>
 </div>
@@ -694,9 +693,9 @@ list4=UDC(n,s,q,crit=crit)
 opt_design = list4$UniDOE_Matrix
 LP_list = LP(X0 = opt_design)
 LP_list$obj0</code></pre>
-<pre><code>## [1] 0.6211792</code></pre>
+<pre><code>## [1] 0.6233425</code></pre>
 <pre class="r"><code>LP_list$obj</code></pre>
-<pre><code>## [1] 0.621106</code></pre>
+<pre><code>## [1] 0.6232998</code></pre>
 <p><a id="ce"></a></p>
 </div>
 </div>
@@ -738,11 +737,13 @@ MD2_M1</code></pre>
 </div>
 <div id="references" class="section level2">
 <h2>References:</h2>
-<p>[1] Hickernell, F. J., 1998, “A generalized discrepancy and quadrature error bound”, Mathematics of Computation, 67, 299-322.</p>
-<p>[2] Johnson, M. and Moore, L. and Ylvisaker, D., 1990, “Minimax and maximin distance designs”, Journal of Statistical Planning and Inference, 26, 131-148.</p>
-<p>[3] K.T. Fang. The uniform designs: application of number-theoretic methods in experimental design. Acta Math. Appl. Sinica, 3(363-372), 1980.</p>
-<p>[4] K.T. Fang, X. Ke and A.M. Elsawah. Construction of uniform designs via an adjusted threshold accepting algorithm.<span class="math inline">\(Journal\ Of\ Complexity\)</span>.2017.</p>
-<p>[5] Y.D. Zhou, K.T. Fang, J.H. Ning, Mixture discrepancy for quasi-random point sets, J. Complexity 29 (2013) 283-301.</p>
+<p>[1] Hickernell, F. J.,1998,“A generalized discrepancy and quadrature error bound”, Mathematics of Computation, 67, (299-322).</p>
+<p>[2] Johnson, M. and Moore, L. and Ylvisaker, D.,1990, “Minimax and maximin distance designs”, Journal of Statistical Planning and Inference, 26, (131-148).</p>
+<p>[3] K.T. Fang,1980,“The uniform designs: application of number-theoretic methods in experimental design”,Acta Math.Appl. Sinica, 3(363-372).</p>
+<p>[4] K.T. Fang, X. Ke and A.M. Elsawah,2017,Construction of uniform designs via an adjusted threshold accepting algorithm.Journal Of Complexity.</p>
+<p>[5] R.C. Jin, W. Chen, A. Sudjianto,2005,“An efficient algorithm for constructing optimal design of computer experiments”,Journal of Statistical Planning and Inference,Volume 134, Issue 1,(268-287).</p>
+<p>[6]X. Ke, R. Zhang, H.J. Ye,2015,“Two- and three-level lower bounds for mixture L2-discrepancy and construction of uniform designs by threshold accepting”,Journal of Complexity,Volume 31, Issue 5,(741-753).</p>
+<p>[7] Y.D. Zhou, K.T. Fang, J.H. Ning,2013,“Mixture discrepancy for quasi-random point sets”,Journal of Complexity 29,(283-301).</p>
 </div>
 
 

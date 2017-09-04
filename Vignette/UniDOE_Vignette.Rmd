@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: "UniDOE Vignette"
 author: "Aijun Zhang and Haoyu Li"
@@ -531,3 +532,539 @@ designs", Journal of Statistical Planning and Inference, 26, (131-148).
 [6]X. Ke, R. Zhang, H.J. Ye,2015,"Two- and three-level lower bounds for mixture L2-discrepancy and construction of uniform designs by threshold accepting",Journal of Complexity,Volume 31, Issue 5,(741-753).
 
 [7] Y.D. Zhou, K.T. Fang, J.H. Ning,2013,"Mixture discrepancy for quasi-random point sets",Journal of Complexity 29,(283-301).
+=======
+---
+title: "UniDOE Vignette"
+author: "Aijun Zhang and Haoyu Li"
+date: "August 30, 2017"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+> [Introduction](#intro)
+
+> [Installation](#install)
+
+> [Criteria Supported](#cs)
+
+> [Uniform Design Construction](#udc)
+
+> [Augmented Design Construction](#adc)
+
+> [Level Permutation](#lp)
+
+> [Criteria Evaluation](#ce)
+
+> [References](#reference)
+
+
+<a id="intro"></a>
+
+## Introduction:
+
+Most projects in the world require building surrogate models based on computer generated experiments to reduce cost. It's a challenging task for both industries and researchers to devise an efficient design of experiment. To improve the space-filling property and computational efficiencies for designs, the uniform experimental design(K.T.Fang,1980) is a prevalent method, which allocates experiments on the experimental domain in a uniform fashion(K.T.Fang,X.Ke and A.M.Elsawah, 2017). varieties of discrepancy measures such as centralized-$L_2$ discrepancy(CL2), mixture-$L_2$ discrepancy(MD2) and maximin distance criterion are popularly used as objective functions.
+
+UniDOE is a package that aims at finding an efficient experimental design using a stochastic evolutionary(SE) algorithm. The optimal experimental design problem is to search a design $X$ in a given design class $Z$, target of which is to optimize it with respect to different criteria. For simplicity, Let D(.) be a discrepency function such as MD2 and our package intends to seek for an optimal design $X^*\in Z$, which minimizes the objective function in $Z$,i.e.
+$$
+D(X^*) = min_{X\in Z}D(X)
+$$
+
+More details about criterion varieties and functions will be elaborated in separate sections.
+
+<a id="install"></a>
+
+## Installation:
+
+#### Dependencies: 32-bit R(>3.4.1), Rtools(>=3.4), devtools
+
+
+The simplest way to use UniDOE is to install from github:
+
+```{r, eval=FALSE}
+library(devtools)
+install_github(repo="HAOYU-LI/UniDOE")
+```
+
+Source code for UniDOE is not published, but users can get access to R code and install from github. Details and examples for utilizing install_github can be retrieved from its function documentation
+
+```{r, eval=FALSE}
+help(install_github)
+```
+
+
+Alternatively, it's also convenient to clone the binary source package from author's  github page(e.g. https://github.com/HAOYU-LI/UniDOE) and install it from R command line:
+
+```{r, eval=FALSE}
+install.packages(file.choose(),repos=NULL)
+```
+
+Then choose the source .zip file to install from source. 
+
+GUI installation is also available for users by following instructions from different IDE: For R studio users, find "Tools" in tool menu bar: $Tools->Install\ packages->Install\ from\ $ and select "Package Archive File" to install UniDOE source package.
+
+
+<a id="cs"></a>
+
+## Criteria Supported:
+
+CL2, MD2 and Maximin discrepancy measures are supported in UniDOE. Users can set different measures as objective function in search algorithm.
+
+
+
+$\textbf{Centralized L2 Discrepancy Criterion(CL2)}$
+
+Centralized $L_2$ discerpancy is a measure of $\textbf{[[}$difference between empirical cumulative distribution function of an experimental design and uniform cumulative distribution function$\textbf{]]}$. Compared to other $L_p$ discrepancies, it can be expressed more charmingly and it's easier to compute. Formula for CL2 was proposed by Hickernell(1998):
+$$
+CL_2(X)^2 = (\frac{13}{12})^s - \frac{2}{n}\sum_{i=1}^{n}\prod_{k=1}^{s}(1+\frac{1}{2}|x_{ik}-0.5|-\frac{1}{2}|x_{ik}-0.5|^2)
+\\
++\frac{1}{n^2}\sum_{i=1}^{n}\sum_{j=1}^{n}\prod_{k=1}^{s}(1+\frac{1}{2}|x_{ik}-0.5|+\frac{1}{2}|x_{jk}-0.5|-\frac{1}{2}|x_{ik}-x_{jk}|)
+$$
+,where n is runs, s is factors for the design.
+
+
+
+$\textbf{Mixture L2 Discrepancy(MD2)}$
+
+Recent research has shown that Centralized $L_2$ discerpancy contains some limitations when dealing with high dimensional data. The discrepancy value is less influenced by points near center of design. Repeated experiments will not provide additional information but sometimes it will have smaller discrepancy value.
+For instance, let's consider two design of experiments given in Y.D.Zhou's paper(2013)  $U(24,3^3)$:
+```{r, eval=TRUE}
+M1 = matrix(c(1,1,1,1,1,3,1,2,1,1,2,2,1,2,3,1,3,1,1,3,2,1,3,3,2,1,1,2,1,2,2,1,3,2,2,1,2,2,2,2,2,3,2,3,1,2,3,2,3,1,1,3,1,2,3,1,3,3,2,2,3,2,3,3,3,1,3,3,2,3,3,3),ncol=3,byrow=TRUE)
+
+M1 
+
+
+M2 = matrix(c(1,1,1,1,1,2,1,1,3,1,2,1,1,2,3,1,3,1,1,3,2,1,3,3,2,1,1,2,1,3,2,2,2,2,2,2,2,2,2,2,2,2,2,3,1,2,3,3,3,1,1,3,1,2,3,1,3,3,2,1,3,2,3,3,3,1,3,3,2,3,3,3),ncol=3,byrow=TRUE)
+
+M2
+```
+
+The Centralized $L_2$ discerpancy of the two designs are as following:
+
+$$
+CD^2(M1) = 0.032779
+\\
+CD^2(M2) = 0.032586
+$$
+Our intuition and experience tell us that M1 is a better design since M2 has four repeated experiments. The criterion value given by CD2 is unreasonable, which implicates that M2 is more superior than M1.  
+
+Under the motivation for finding a more efficient objective function, MD2 is formulized by Y.D.Zhou et al(2013), which satisfies seven criteria(Fang et al) for assessing measures of uniformity for construction of experimental designs.
+
+[C1] Are invariant under permuting factors and/or runs.
+
+[C2] Are invariant under coordinate rotation.
+
+[C3] Measure not only uniformity of P on Cs, but also projection uniformity of P on Cu, where u is a non-empty subset of {1,.,s}.
+
+[C4] Have some geometric meaning.
+
+[C5] Are easy to compute.
+
+[C6] Satisfy K-H inequality.
+
+[C7] Are consistent with other criteria in experimental design.
+
+Formula for MD2 is given below:
+$$
+MD^2(X) = (\frac{19}{12})^s - \frac{2}{n}\sum_{i=1}^{n}\prod_{j=1}^{s}(\frac{5}{3}-\frac{1}{4}|x_{ij}-\frac{1}{2}|-\frac{1}{4}|x_{ij}-\frac{1}{2}|^2) 
+\\
++ \frac{1}{n^2}\sum_{i=1}^{n}\sum_{k=1}^{n}\prod_{j=1}^{s}(\frac{15}{8} - \frac{1}{4}|x_{ij}-\frac{1}{2}|-\frac{1}{4}|x_{kj}-\frac{1}{2}|-\frac{3}{4}|x_{ij}-x_{kj}| + \frac{1}{2}|x_{ij}-x_{kj}|^2)
+$$
+Similarly, n is runs, s is factors for design. MD2 discrepancy for M1 and M2 mentioned above is:
+
+$$
+MD^2(M1) = 0.109499
+\\
+MD^2(M2) = 0.110007
+$$
+, which is more reasonable.
+
+
+
+$\textbf{Maximin Distance Criterion(Maximin)}$
+
+Proposed by Johnson, et al(1990), a design is called maximin distance design if the design maximizes minimum inter-row distance:
+$$
+\min_{1<=i,j<=n,i\neq{j}}d(x_i,x_j)
+$$
+Where
+$$
+d(x_i,x_j) = [\sum_{k=1}^{s}|x_{ik}-x_{jk}|^m]^\frac{1}{m}
+$$
+m can be any positive integer. Commonly, m=1 or 2, When m=1, we call it 1-distance and when m=2, we call it 2-distance or Euclidean distance.
+
+
+
+<a id="udc"></a>
+
+## Uniform Design Construction(UDC):
+
+### Argument:
+
+$n$ : 
+
+    an integer number. number of runs for design, needed when init="rand" and "orth".
+
+$s$ : 
+
+    an integer number. number of columns for design, needed when init="rand" and "orth".
+
+$q$ : 
+
+    an integer number. levels for design, , needed when init="rand" and "orth".
+
+$init$ : 
+
+    a character R object. Type for initial design,
+    
+    "rand"(default) : randomly generated initial design.
+    
+    "orth" : User-input initial design with specific structure, which is fixed by column during optimization process.
+      
+    "input" : User-input initial design.
+    
+$initX$ : 
+
+    a matrix object. An user-input initial design, needed when init="orth" or init="input".
+
+$crit$ : 
+
+    a character R object. Type of objetive function to use.
+      
+    "maximin" – maximin Discrepancy ;
+      
+    "CL2" –Centered L2 Discrepancy ;
+      
+    "MD2" –Mixture L2 Discrepancy ;
+       
+$maxiter$ :
+
+    maximum iteration numbers in updating the design.(default: 10^5)
+
+$tol$ : 
+
+    a float number. Searching process is easier falling into improving process during searching if tol is larger. Otherwise, the searching is easier falling into exploration process.
+    
+    In imporving process, threshold for stochastic evolutionary(SE) algorithm is maintained on a small value so that only better design or slightly worse design will be accepted.
+    
+    In exploration process, the design has reached local minimum and threshold is adjusted to help algorithm step out from local minimum, which means worse designs are accepted so as to search for a better global design.
+
+$th0$ :
+  
+    an integer number. Initial threshold used in SE algorithm
+
+$vis$ :
+  
+    an boolean number. If TRUE, plot obj_list.
+
+
+### return value:
+
+#### initial design(Init_Matrix):
+
+    In our case, it's a randomly generated design with runs=12,factors=3,levels=4.
+    
+#### Design after searching process(UniDOE_Matrix):
+
+    The optimized design.
+    
+#### Initial objective value(obj0):
+
+    Discrepancy value for initial design.
+    
+#### Final objective value(obj):
+  
+    Discrepancy value for Design after searching process.
+    
+#### Time consumption in optimization(time(s)):
+
+    Time used to find the optimized design from initial design.
+    
+#### objective value list(obj_list):
+
+    Objective list during searching process. We record every change of discrepancy value in searching process.
+
+
+### Examples:
+
+Uniform Design Construction function is devised to perform element-wise exchange with stochastic evolutionary algorithm to find a better design of experiments. Users can choose to manually input or random generate initial matrix. Details can be viewed in UDC function documentation:
+
+```{r, eval=FALSE}
+library(UniDOE)
+?UDC
+```
+
+For instance, if we desire to optimize an randomly generated design with n=12,s=3,q=4
+```{r, eval=TRUE}
+library(UniDOE)
+n=12
+s=3
+q=4
+crit = "MD2" #(default is MD2)
+list0 = UDC(n,s,q,crit=crit)
+```
+
+```{r, eval=TRUE}
+list0$Init_Matrix
+```
+
+```{r, eval=TRUE}
+list0$UniDOE_Matrix
+```
+
+```{r, eval=TRUE}
+list0$obj0
+```
+
+```{r, eval=TRUE}
+list0$obj
+```
+
+```{r, eval=TRUE}
+list0$`time(s)`
+```
+
+```{r, eval=TRUE}
+list0$obj_list[1:10]
+```
+
+Let's try UDC with a given matrix as initial design. For instance, if we use the design M2 as initial input:
+```{r, eval=TRUE}
+n = 24
+q = 3
+s = 3
+init = "input"
+crit="MD2"
+list1 = UDC(n,s,q,init=init,initX=M2,crit=crit)
+```
+
+```{r, eval=TRUE}
+list1$Init_Matrix
+```
+
+```{r, eval=TRUE}
+list1$UniDOE_Matrix
+```
+
+```{r, eval=TRUE}
+list1$obj0
+list1$obj
+```
+
+It's easy to see that searching process has indeed improved the design by lowering the discrepancy value. The optimized discrepancy value actually equals that of M1 which may implicate it's the global minimum value for design of this specific structure. 
+
+
+
+<a id="adc"></a>
+
+## Augmented Uniform Design Construction(AUDC):
+
+### Argument:
+
+$X0$:
+    
+    an matrix object. A good design which is fixed during search process. A randomly generated or user-input design will conjoin it by row, which will be updated in searching process.
+
+$n$ : 
+
+    an integer number. number of runs for design, needed when init="rand".
+
+$s$ : 
+
+    an integer number. number of columns for design, needed when init="rand".
+
+$q$ : 
+
+    an integer number. levels for design, , needed when init="rand".
+
+$init$ : 
+
+    a character R object. Type for initial design,
+    
+    "rand"(default) : randomly generated initial design.
+      
+    "input" : User-input initial design.
+    
+$initX$ : 
+
+    a matrix object. An user-input initial design, needed when init="input".
+
+$crit$ : 
+
+    a character R object. Type of objetive function to use.
+      
+    "maximin" : maximin Discrepancy.
+      
+    "CL2" : Centered L2 Discrepancy.
+      
+    "MD2"(default) : Mixture L2 Discrepancy.
+       
+$maxiter$ :
+
+    maximum iteration numbers in updating the design.(default: 10^5)
+
+$tol$ : 
+
+    a float number. Searching process is easier falling into improving process during searching if tol is larger. Otherwise, the searching is easier falling into exploration process.
+
+$th0$ :
+  
+    an integer number. Initial threshold used in SE algorithm
+
+$vis$ :
+  
+    an boolean number. If TRUE, plot obj_list.
+
+### return value:
+
+    Return structure of AUDC is same as UDC.
+
+### Examples:
+
+Augmented Uniform Design Construction function aims at implementing augmented searching row-by-row. Compared with UDC that has an option(init="orth") to expand initial design vertically, AUDC concentrates on expanding initial design by row. It fixes user-input design and optimizes the matrix concatenated to it as shown in following example:
+```{r, eval=TRUE}
+n=12#(must be multiples of q)
+s=3
+q=4
+init = "rand" #default is rand
+X0 = matrix(c(1,1,1,2,2,2,3,3,3),ncol=3,byrow=TRUE)# nb. of columns=s
+crit = "MD2" #default is Mixture L2 criteria
+list2=AUDC(X0=X0,n,s,q,init = init,crit=crit)
+list2$Init_Matrix
+list2$UniDOE_Matrix
+```
+
+We can easily observe that first three rows are fixed during optimization process. n represents number of runs for design appended to X0, s must equal to number of columns for X0 and q should also be the same as levels for X0.
+
+Following example illustrates the usage for user-input initial design:
+```{r, eval=TRUE}
+X0 = M1
+initX = M2
+init = "input"
+list3 = AUDC(X0 = X0, init=init,initX=initX)
+list3$Init_Matrix
+list3$UniDOE_Matrix
+```
+
+In this case, X0 ,i.e. M1, is fixed during searching process. initX,i.e.M2, is concatenated to X0 by row and is updated in searching.  n,s,q are not required if init="input".
+
+
+<a id="lp"></a>
+
+## Level Permutation(LP):
+
+### Argument:
+
+$X0$:
+    
+    an matrix object. An optimized design which is to be improved by level permutation.
+
+
+$crit$ : 
+
+    a character R object. Type of objetive function to use.
+      
+    "maximin" : maximin Discrepancy.
+      
+    "CL2" : Centered L2 Discrepancy.
+      
+    "MD2"(default) : Mixture L2 Discrepancy.
+       
+$maxiter$ :
+
+    maximum iteration numbers in updating the design.(default: 10^5)
+
+$tol$ : 
+
+    a float number. Searching process is easier falling into improving process during searching if tol is larger. Otherwise, the searching is easier falling into exploration process.
+
+$th0$ :
+  
+    an integer number. Initial threshold used in SE algorithm
+
+$vis$ :
+  
+    an boolean number. If TRUE, plot obj_list.
+
+### return value:
+
+    Return structure of LP is same as UDC.
+
+### Examples:
+
+```{r, eval=TRUE}
+n=60#(must be multiples of q)
+s=10
+q=30
+crit = "MD2"#(Mixture L2 criteria)
+list4=UDC(n,s,q,crit=crit)
+#Input the already good design into LP function to pursue a further improvement:
+opt_design = list4$UniDOE_Matrix
+LP_list = LP(X0 = opt_design)
+LP_list$obj0
+LP_list$obj
+```
+
+<a id="ce"></a>
+
+## Criteria Evaluation
+
+### Arguments:
+
+$X0$ :
+
+    A matrix object. The design that needs calculating discrepancy value.
+  
+$crit$ : 
+
+    a character R object. Type of objetive function to use.
+      
+    "CL2" : Centered L2 Discrepancy.
+      
+    "MD2"(default) : Mixture L2 Discrepancy.
+
+### return value:
+
+    Return the criterion value for X0.
+
+### Examples:
+
+```{r, eval=TRUE}
+
+# centralized L2 discrepancy for M1 and M2:
+CD2_M1 = Eval(M1,crit = "CL2")
+CD2_M2 = Eval(M2,crit = "CL2")
+CD2_M1
+CD2_M2
+```
+
+
+```{r, eval=TRUE}
+
+# Mistured L2 discrepancy for M1 and M2:
+MD2_M1 = Eval(M1,crit = "MD2")
+MD2_M2 = Eval(M2,crit = "MD2")
+MD2_M1
+MD2_M2
+```
+
+
+<a id="reference"></a>
+
+## References:
+
+[1] Hickernell, F. J.,1998,"A generalized discrepancy and quadrature error bound", Mathematics of Computation, 67, (299-322).
+
+[2] Johnson, M. and Moore, L. and Ylvisaker, D.,1990, "Minimax and maximin distance 
+designs", Journal of Statistical Planning and Inference, 26, (131-148).
+
+[3] K.T. Fang,1980,"The uniform designs: application of number-theoretic methods in experimental design",Acta Math.Appl. Sinica, 3(363-372).
+
+[4] K.T. Fang, X. Ke and A.M. Elsawah,2017,Construction of uniform designs via an adjusted threshold accepting algorithm.Journal Of Complexity.
+
+[5] R.C. Jin, W. Chen, A. Sudjianto,2005,"An efficient algorithm for constructing optimal design of computer experiments",Journal of Statistical Planning and Inference,Volume 134, Issue 1,(268-287).
+
+[6]X. Ke, R. Zhang, H.J. Ye,2015,"Two- and three-level lower bounds for mixture L2-discrepancy and construction of uniform designs by threshold accepting",Journal of Complexity,Volume 31, Issue 5,(741-753).
+
+[7] Y.D. Zhou, K.T. Fang, J.H. Ning,2013,"Mixture discrepancy for quasi-random point sets",Journal of Complexity 29,(283-301).
+>>>>>>> 82d2b9a11fba281c00ad4d99c70690c2c766d90b
