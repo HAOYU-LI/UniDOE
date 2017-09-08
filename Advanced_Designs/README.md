@@ -1,34 +1,7 @@
-# Package: UniDOE
-### Author: Haoyu Li and Aijun Zhang 
-### date: 22/08/2017
-### Depends: 
-32-bit R(>= 3.4.1)
-### Imports: 
-Rcpp (>= 0.12.12)
-### Linking To: 
-Rcpp
+# Advanced design of experiments
+### date: 08/09/2017
 ### Introduction:
-UniDOE is a R package, which implements an efficient stochastic evolutionary(SE) algorithm to search for design of experiment. Users can either download and install from binary source package or install from github directly using devtools, details of which are illustrated below. This package is distributed in the hope that it will be useful, but without any warranty.
-### How to install:
-At first, Make sure you are using 32-bit R(>=3.4.1).
 
-Then download and install Rcpp(>=0.12.12) package if you haven't installed or updated it to >=0.12.12 version.
+Advanced design of experiments based on centered L2 discrepancy and Mixture L2 discrepancy are uploaded in this directory. Both the old online best designs and new advanced designs are included and separated into different sub-directories. For Latin hypercube designs, the suffix is *_nsn, while for general designs the suffix is *_nsq. In each sub-directories, advanced designs after optimizating process by UniDOE are located in $Improvement$ directory and their corresponding discrepancies are located in $Discrepancy$ directory.
 
-#### First way
-git clone this repostory.
-
-In R command-line: 
-
-##### install.packages(file.choose(),repos=NULL)
-
-Choose UniDOE_0.1.1.zip to install Or install it from GUI.
-
-#### Second Way
-Make sure you installed devtools.
-
-In R:
-
-##### library(devtools)
-
-##### install_github(repo="HAOYU-LI/UniDOE")
-
+The R files to obtain these advanced designs are also included in this repository.  *_Improvement_ratio.txt files record the improvement ratio for the online best designs: http://www.cms-ud.com/UD/UniformDesign.html 
