@@ -1,0 +1,10 @@
+
+improving_ratio = 
+
+number of improved design divides number of valid design scratched from: http://www.cms-ud.com/UD/UniformDesign.html
+
+=
+
+0.84729064039
+
+Supplements: Discrepancy values that decrease less than 1e-12 are neglected.
