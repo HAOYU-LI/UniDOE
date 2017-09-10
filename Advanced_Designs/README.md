@@ -7,3 +7,7 @@ Advanced design of experiments based on centered L2 discrepancy and Mixture L2 d
 The R files to obtain these advanced designs are also included in this repository.  
 
 *_Improvement_ratio.txt files record the improvement ratio for the online best designs: http://www.cms-ud.com/UD/UniformDesign.html 
+
+### Naming rules:
+
+All .csv files follow naming rules : [crit_type]\_[run]\_[factor]\_[level].csv 
