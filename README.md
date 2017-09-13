@@ -19,7 +19,9 @@ git clone this repostory.
 
 In R command-line: 
 
-##### install.packages(file.choose(),repos=NULL)
+```
+install.packages(file.choose(),repos=NULL)
+```
 
 Choose UniDOE_0.1.1.zip to install Or install it from GUI.
 
@@ -28,7 +30,12 @@ Make sure you installed devtools.
 
 In R:
 
-##### library(devtools)
-
-##### install_github(repo="HAOYU-LI/UniDOE")
+```
+library(devtools)
+install_github(repo="HAOYU-LI/UniDOE")
+```
+### Useful links:
+* [Experimental design](https://en.wikipedia.org/wiki/Design_of_experiments) - Intro to design of experiments
+* [License](https://github.com/HAOYU-LI/UniDOE/blob/master/LICENSE) - License for this project
+* [Contributor&Maintainer](http://www.statsoft.org/)
 
