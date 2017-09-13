@@ -12,12 +12,16 @@ UniDOE is a R package, which implements an efficient stochastic evolutionary(SE)
 ### How to install:
 At first, Make sure you are using 32-bit R(>=3.4.1).
 
-Then download and install Rcpp(>=0.12.12) package if you haven't installed or updated it to >=0.12.12 version.
-
 #### First way
-git clone this repostory.
+
+Download and install Rcpp(>=0.12.12) package if you haven't installed or updated it to >=0.12.12 version.
 
 In R command-line: 
+```
+# It's easy to install Rcpp from CRAN
+install.packages("Rcpp")
+```
+Git clone this repostory to your local machine. After that, you can install UniDOE from local files:
 
 ```
 install.packages(file.choose(),repos=NULL)
@@ -26,9 +30,13 @@ install.packages(file.choose(),repos=NULL)
 Choose UniDOE_0.1.1.zip to install Or install it from GUI.
 
 #### Second Way
-Make sure you installed devtools.
+It's more convenient to install UniDOE from github. At first, make sure you installed devtools.
 
-In R:
+```
+install.packages("devtools")
+```
+
+Then install UniDOE from github:
 
 ```
 library(devtools)
