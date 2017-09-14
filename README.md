@@ -10,7 +10,27 @@ Rcpp
 ### Introduction:
 UniDOE is a R package, which implements an efficient stochastic evolutionary(SE) algorithm to search for [design of experiment](https://en.wikipedia.org/wiki/Design_of_experiments). Computational procedures are mainly achieved by c++ so that the calculation speed is greatly boosted. Users can either download and install from binary source package or install from github directly using devtools, details of which are illustrated below. This package is distributed in the hope that it will be useful, but without any warranty.
 ### How to install:
-At first, Make sure you are using 32-bit R(>=3.4.1).
+At first, Make sure you are using 32-bit R(>=3.4.1). Typing 'version' in R command line can retrieve related information, e.g.:
+```
+version
+```
+Output should show corresponding R version and architecture of your current platform:
+```
+platform       i386-w64-mingw32            
+arch           i386                        
+os             mingw32                     
+system         i386, mingw32               
+status                                     
+major          3                           
+minor          4.1                         
+year           2017                        
+month          06                          
+day            30                          
+svn rev        72865                       
+language       R                           
+version.string R version 3.4.1 (2017-06-30)
+nickname       Single Candle 
+```
 
 #### First way
 
