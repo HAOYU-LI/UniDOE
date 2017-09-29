@@ -6,6 +6,7 @@ UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000, tol
     n = nrow(initX)
     s = ncol(initX)
     q = max(initX) - min(initX) + 1
+    initX = as.matrix(initX)
   }
   #restrictions for arguments:
   if(is.double(n)&&is.double(s)&&is.double(q) == FALSE){stop("Wrong types of n,s,q.")}
@@ -40,6 +41,7 @@ AUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000
     n = nrow(initX)
     s = ncol(initX)
     q = max(initX) - min(initX) + 1
+    initX = as.matrix(initX)
   }
   #restrictions for arguments:
   if(n<=1 || s<=0 || q <=1 ){stop("Please input valid X0.")}
@@ -76,6 +78,7 @@ LP<- function(X0=matrix(0),crit="MD2",maxiter=10000, tol=-1, th0=-1, vis=FALSE)
   else if(crit == "maximin"){crit=1}
   else{crit=4}
 
+  X0 = as.matrix(X0)
   q = max(X0) - min(X0) + 1
   list <- StoLP(X0,q,crit,maxiter,tol,th0)
   if(vis == TRUE){
@@ -92,6 +95,7 @@ LP<- function(X0=matrix(0),crit="MD2",maxiter=10000, tol=-1, th0=-1, vis=FALSE)
 
 Eval<-function(X0 = matrix(0), crit="MD2")
 {
+  X0 = as.matrix(X0)
   q = max(X0) - min(X0) + 1
   if(crit == "MD2"){crit=0}
   else{crit=1}
