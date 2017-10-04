@@ -3,7 +3,7 @@ Type: Package
 Title: UniDOE package aims at developing design matrix based on some given criteria.
 Version: 0.1.1
 Author: A. Zhang and H. Li
-Maintainer: http://www.statsoft.org/
+Maintainer: LHY <u3514184@connect.hku.hk>
 Depends:  R (>= 3.4.1)
 Description: See documentations for functions
 Encoding: UTF-8
