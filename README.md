@@ -1,5 +1,5 @@
 # Package: UniDOE
-### Author: Haoyu Li and Aijun Zhang 
+### Author: Aijun Zhang and Haoyu Li
 ### date: 22/08/2017
 ### Depends: 
 32-bit R(>= 3.4.1)
