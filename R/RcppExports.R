@@ -5,15 +5,15 @@ StoEval <- function(X0, q, crit = 0L) {
     .Call(`_UniDOE_StoEval`, X0, q, crit)
 }
 
-StoUDC <- function(n, s, q, init, initX, crit, maxiter, tol, th0) {
-    .Call(`_UniDOE_StoUDC`, n, s, q, init, initX, crit, maxiter, tol, th0)
+StoUDC <- function(n, s, q, init, initX, crit, maxiter, hits_ratio) {
+    .Call(`_UniDOE_StoUDC`, n, s, q, init, initX, crit, maxiter, hits_ratio)
 }
 
-StoAUDC <- function(XP, n, s, q, init, initX, crit, maxiter, tol, th0) {
-    .Call(`_UniDOE_StoAUDC`, XP, n, s, q, init, initX, crit, maxiter, tol, th0)
+StoAUDC <- function(XP, n, s, q, init, initX, crit, maxiter, hits_ratio) {
+    .Call(`_UniDOE_StoAUDC`, XP, n, s, q, init, initX, crit, maxiter, hits_ratio)
 }
 
-StoLP <- function(X0, q, crit, maxiter, tol, th0) {
-    .Call(`_UniDOE_StoLP`, X0, q, crit, maxiter, tol, th0)
+StoLP <- function(X0, q, crit, maxiter, hits_ratio) {
+    .Call(`_UniDOE_StoLP`, X0, q, crit, maxiter, hits_ratio)
 }
 
