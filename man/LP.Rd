@@ -2,29 +2,28 @@
 \alias{LP}
 \title{Improve design with level permutation}
 \usage{
-  LP( X0, crit, maxiter, tol, th0, vis)
+  LP( X0, crit, maxiter, hits_ratio, vis)
 }
 \description{
   This function aims at improving current design using exhaustive level permutation.
 }
 \arguments{
-  \item{X0}{Current design }
+\item{X0}{Current design }
 
-  \item{crit}{an character R object. Type of criterion to use.
+\item{crit}{an character R object. Type of criterion to use.
 
-    "maximin" -- maximin Discrepancy    ;
+  "maximin" -- maximin Discrepancy    ;
 
-    "CL2"  --Centered L2 Discrepancy ;
+  "CL2"  --Centered L2 Discrepancy ;
 
-    "MD2"  --Mixture L2  Discrepancy ;}
+  "MD2"  --Mixture L2  Discrepancy ;}
 
-  \item{maxiter}{a positive integer  R  object}
+\item{maxiter}{a positive integer  R  object}
 
-  \item{tol}{an integer R  object}
 
-  \item{th0}{an integer R  object}
+\item{hits_ratio}{an float R object. Default value is 0.1, which is the ratio to accept changes of design in inner for loop. Details can be checked in (Zhang, A. and Li, H. (2017). UniDOE: an R package for uniform design construction via stochastic optimization.)}
 
-  \item{vis}{an boolean R object}
+\item{vis}{an boolean R object}
 
 }
 \value{
@@ -37,5 +36,5 @@
   q=30
   crit = "MD2"#(Mixture L2 criteria)
   list1=UDC(n,s,q,crit=crit)
-  LP_list = LP(X0=list1$UniDOE_Matrix,crit = crit,vis=TRUE)
+  LP_list = LP(list1$UniDOE_Matrix,q,vis=TRUE)
 }

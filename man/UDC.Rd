@@ -2,7 +2,7 @@
 \alias{UDC}
 \title{Uniform Design Construction}
 \usage{
-UDC(n,s,q,init,initX,crit,maxiter,tol,th0,vis)
+UDC(n,s,q,init,initX,crit,maxiter,hits_ratio,vis)
 }
 \description{
   This function takes n,s,q and other arguments to output a list(described below).
@@ -28,9 +28,8 @@ UDC(n,s,q,init,initX,crit,maxiter,tol,th0,vis)
 
 \item{maxiter}{a positive integer  R  object}
 
-\item{tol}{an integer R  object}
 
-\item{th0}{an integer R  object}
+\item{hits_ratio}{an float R object. Default value is 0.1, which is the ratio to accept changes of design in inner for loop. Details can be checked in (Zhang, A. and Li, H. (2017). UniDOE: an R package for uniform design construction via stochastic optimization.)}
 
 \item{vis}{an boolean R object}
 

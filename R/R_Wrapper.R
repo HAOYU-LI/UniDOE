@@ -1,12 +1,11 @@
 library(Rcpp)
 
-UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000, tol=-1, th0=-1,vis=FALSE)
+UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000,hits_ratio = 0.1,vis=FALSE)
 {
   if(init=="input"){
     n = nrow(initX)
     s = ncol(initX)
     q = max(initX) - min(initX) + 1
-    initX = as.matrix(initX)
   }
   #restrictions for arguments:
   if(is.double(n)&&is.double(s)&&is.double(q) == FALSE){stop("Wrong types of n,s,q.")}
@@ -22,7 +21,7 @@ UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000, tol
   else{crit=4}
 
   #recall Rcpp compiled StoUDC function:
-  list <- StoUDC(n,s,q,init,initX,crit,maxiter,tol,th0)
+  list <- StoUDC(n,s,q,init,initX,crit,maxiter,hits_ratio)
   if(vis == TRUE){
     plot(list$obj_list,type="l")
     bst_score = list$obj
@@ -35,13 +34,12 @@ UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000, tol
 }
 
 
-AUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000,tol=-1,th0=-1,vis=FALSE)
+AUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000,hits_ratio = 0.1,vis=FALSE)
 {
   if(init=="input"){
     n = nrow(initX)
     s = ncol(initX)
     q = max(initX) - min(initX) + 1
-    initX = as.matrix(initX)
   }
   #restrictions for arguments:
   if(n<=1 || s<=0 || q <=1 ){stop("Please input valid X0.")}
@@ -59,7 +57,7 @@ AUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000
   else{crit=4}
 
   #recall Rcpp compiled StoAUDC function:
-  list <- StoAUDC(X0,n,s,q,init,initX,crit,maxiter,tol,th0)
+  list <- StoAUDC(X0,n,s,q,init,initX,crit,maxiter,hits_ratio)
   if(vis == TRUE){
     plot(list$obj_list,type="l")
     bst_score = list$obj
@@ -72,15 +70,14 @@ AUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000
 }
 
 
-LP<- function(X0=matrix(0),crit="MD2",maxiter=10000, tol=-1, th0=-1, vis=FALSE)
+LP<- function(X0=matrix(0),crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
 {
   if(crit == "CL2"){crit=2}
   else if(crit == "maximin"){crit=1}
   else{crit=4}
 
-  X0 = as.matrix(X0)
   q = max(X0) - min(X0) + 1
-  list <- StoLP(X0,q,crit,maxiter,tol,th0)
+  list <- StoLP(X0,q,crit,maxiter,hits_ratio)
   if(vis == TRUE){
     plot(list$obj_list,type="l")
     bst_score = list$obj
@@ -95,7 +92,6 @@ LP<- function(X0=matrix(0),crit="MD2",maxiter=10000, tol=-1, th0=-1, vis=FALSE)
 
 Eval<-function(X0 = matrix(0), crit="MD2")
 {
-  X0 = as.matrix(X0)
   q = max(X0) - min(X0) + 1
   if(crit == "MD2"){crit=0}
   else{crit=1}
