@@ -31,7 +31,7 @@ UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000,hits
     abline(h =list$obj_list[min_index],col=4 )
     title(main = c("best_score = ",bst_score))
   }
-  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_lists")
+  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_list")
   return (list)
 }
 
@@ -63,7 +63,7 @@ AUDC <- function (X0,n,crit="MD2",maxiter=100000,hits_ratio = 0.1,vis=FALSE)
     abline(h =list$obj_list[min_index],col=4 )
     title(main = c("best_score = ",bst_score))
   }
-  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_lists")
+  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_list")
   return(list)
 }
 
@@ -84,7 +84,7 @@ LP<- function(X0=matrix(0),crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
     abline(h =list$obj_list[min_index],col=4 )
     title(main = c("best_score = ",bst_score))
   }
-  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_lists")
+  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_list")
   return (list)
 }
 
@@ -158,7 +158,7 @@ RUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",J=10,maxiter=2
     abline(h =return_list$obj_list[min_index],col=4 )
     title(main = c("best_score = ",bst_score))
   }
-  names(list) = c("initial_design","final_design","criterion_value","criterion_lists","time_consumed")
+  names(list) = c("initial_design","final_design","criterion_value","criterion_list","time_consumed")
   return(return_list)
 }
 
