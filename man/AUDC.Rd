@@ -12,14 +12,6 @@ AUDC(X0,n,s,q,init,initX,crit,maxiter,hits_ratio,vis)
 
 \item{n}{an integer R object}
 
-\item{s}{an integer R object}
-
-\item{q}{an integer R object}
-
-\item{init}{an string vector R object: "rand"(default) or "input"}
-
-\item{initX}{an user-defined integer matrix R object, which is fixed in search. Needed when init="orth" or init="input"}
-
 \item{crit}{an character R object. Type of criterion to use.
 
       "maximin" -- maximin Discrepancy    ;
@@ -42,11 +34,9 @@ AUDC(X0,n,s,q,init,initX,crit,maxiter,hits_ratio,vis)
 #e.g.1.
 #Set a fixed initial matrix:
 n=12#(must be multiples of q)
-s=3
-q=4
 mat0 = matrix(c(1,1,1,2,2,2,3,3,3),ncol=3,byrow=TRUE)# nb. of columns=s
 crit = "MD2"#(Mixture L2 criteria)
-list1=AUDC(X0=mat0,n,s,q,crit=crit)
+list1=AUDC(X0=mat0,n,crit=crit)
 
 #e.g.2.
 #Set a fixed initial matrix with visualization:
@@ -54,9 +44,8 @@ n=8#(must be multiples of q)
 s=3
 q=4
 mat0 = matrix(c(1,1,1,2,2,2,3,3,3),ncol=3,byrow=TRUE)# nb. of columns=s
-init = "rand"
 crit = "MD2"#(Mixture L2 criteria)
 vis= TRUE
-list1=AUDC(X0=mat0,n,s,q,init=init,crit=crit,vis=vis)
+list1=AUDC(X0=mat0,n,crit=crit,vis=vis)
 
 }
