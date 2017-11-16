@@ -41,8 +41,6 @@ list1=AUDC(X0=mat0,n,crit=crit)
 #e.g.2.
 #Set a fixed initial matrix with visualization:
 n=8#(must be multiples of q)
-s=3
-q=4
 mat0 = matrix(c(1,1,1,2,2,2,3,3,3),ncol=3,byrow=TRUE)# nb. of columns=s
 crit = "MD2"#(Mixture L2 criteria)
 vis= TRUE

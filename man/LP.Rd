@@ -36,5 +36,5 @@
   q=30
   crit = "MD2"#(Mixture L2 criteria)
   list1=UDC(n,s,q,crit=crit)
-  LP_list = LP(list1$UniDOE_Matrix,q,vis=TRUE)
+  LP_list = LP(list1$UniDOE_Matrix,vis=TRUE)
 }

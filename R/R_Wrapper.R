@@ -3,6 +3,7 @@ library(Rcpp)
 UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000,hits_ratio = 0.1,vis=FALSE)
 {
   if(init=="input"){
+    initX = as.matrix(initX)
     n = nrow(initX)
     s = ncol(initX)
     q = max(initX) - min(initX) + 1
@@ -72,7 +73,7 @@ LP<- function(X0=matrix(0),crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
   if(crit == "CL2"){crit=2}
   else if(crit == "maximin"){crit=1}
   else{crit=4}
-
+  X0 = as.matrix(X0)
   q = max(X0) - min(X0) + 1
   list <- StoLP(X0,q,crit,maxiter,hits_ratio)
   if(vis == TRUE){
@@ -90,6 +91,7 @@ LP<- function(X0=matrix(0),crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
 
 Eval<-function(X0 = matrix(0), crit="MD2")
 {
+  X0 = as.matrix(X0)
   q = max(X0) - min(X0) + 1
   if(crit == "MD2"){crit=0}
   else{crit=1}
@@ -101,6 +103,7 @@ RUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",J=10,maxiter=2
                   hits_ratio = c(0.3,0.2,0.15,0.1,0.05,0.01),vis=FALSE)
 {
 
+  X0 = as.matrix(X0)
   s = ncol(X0)
   q = max(X0) - min(X0) + 1
 
