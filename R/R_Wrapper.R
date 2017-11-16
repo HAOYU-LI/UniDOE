@@ -22,6 +22,7 @@ UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000,hits
 
   #recall Rcpp compiled StoUDC function:
   list <- StoUDC(n,s,q,init,initX,crit,maxiter,hits_ratio)
+  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_lists")
   if(vis == TRUE){
     plot(list$obj_list,type="l")
     bst_score = list$obj
@@ -37,6 +38,7 @@ UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=100000,hits
 AUDC <- function (X0,n,crit="MD2",maxiter=100000,hits_ratio = 0.1,vis=FALSE)
 {
 
+  X0 = as.matrix(X0)
   s = ncol(X0)
   q = max(X0) - min(X0) + 1
   #restrictions for arguments:
@@ -52,6 +54,7 @@ AUDC <- function (X0,n,crit="MD2",maxiter=100000,hits_ratio = 0.1,vis=FALSE)
 
   #recall Rcpp compiled StoAUDC function:
   list <- StoAUDC(X0,n,s,q,init="rand",initX=matrix(0),crit,maxiter,hits_ratio)
+  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_lists")
   if(vis == TRUE){
     plot(list$obj_list,type="l")
     bst_score = list$obj
@@ -72,6 +75,7 @@ LP<- function(X0=matrix(0),crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
 
   q = max(X0) - min(X0) + 1
   list <- StoLP(X0,q,crit,maxiter,hits_ratio)
+  names(list) = c("initial_design","final_design","initial_criterion","criterion_value","time_consumed","criterion_lists")
   if(vis == TRUE){
     plot(list$obj_list,type="l")
     bst_score = list$obj
@@ -142,6 +146,7 @@ RUDC <- function (X0,n,s,q,init="rand",initX=matrix(0),crit="MD2",J=10,maxiter=2
   }
   return_list = list(D1,D_global,Dis_glob,Dis_list,(proc.time() - start_time)[3])
   names(return_list) = c(Aug_Matrix,Objective_Matrix,obj,obj_list,time_consumed)
+   names(list) = c("initial_design","final_design","criterion_value","criterion_lists","time_consumed")
 
   if(vis == TRUE){
     plot(return_list$obj_list,type="l")
