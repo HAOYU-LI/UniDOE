@@ -27,8 +27,9 @@
 
 }
 \value{
-  A list that contains Initial design matrix(Init_Matrix),optimal design matrix(UniDOE_Matrix), initial criterion value(critobj0), final criterion value(critobj) and criterion list in update process.
+  A list that contains Initial design matrix(initial_design),optimal design matrix(final_design), initial criterion value(initial_criterion), final criterion value(criterion_value) and criterion list(criterion_lists) in update process.
 }
+
 \examples{
 
   n=60#(must be multiples of q)
@@ -36,5 +37,5 @@
   q=30
   crit = "MD2"#(Mixture L2 criteria)
   list1=UDC(n,s,q,crit=crit)
-  LP_list = LP(list1$UniDOE_Matrix,vis=TRUE)
+  LP_list = LP(list1$final_design,vis=TRUE)
 }

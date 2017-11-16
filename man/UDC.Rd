@@ -35,7 +35,7 @@ UDC(n,s,q,init,initX,crit,maxiter,hits_ratio,vis)
 
 }
 \value{
-  A list that contains Initial design matrix(Init_Matrix),optimal design matrix(UniDOE_Matrix), initial criterion value(critobj0), final criterion value(critobj) and criterion list in update process.
+  A list that contains Initial design matrix(initial_design),optimal design matrix(final_design), initial criterion value(initial_criterion), final criterion value(criterion_value) and criterion list(criterion_lists) in update process.
 }
 \examples{
 ##e.g.1
