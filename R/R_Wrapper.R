@@ -17,9 +17,9 @@ UDC <- function(n,s,q,init="rand",initX=matrix(0),crit="MD2",maxiter=10000,hits_
   stop(("\n The size of Orthogonal matrix mismatches with n,s,q ."))
   }else if((init == "orth") && ncol(initX) == s){stop(("\n If s = ncol(initX), then no update is proceeded."))}
 
-  if(crit == "CL2"){crit=2}
-  else if(crit == "maximin"){crit=1}
-  else{crit=4}
+  if(crit == "maximin"){crit=1}
+  else if(crit == "CL2"){crit=2}
+  else{crit=3}
 
   #recall Rcpp compiled StoUDC function:
   list <- StoUDC(n,s,q,init,initX,crit,maxiter,hits_ratio)
@@ -49,9 +49,9 @@ AUDC <- function (X0,n,crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
   else if(n%%q != 0){stop("Error: n should multiple of level. End of program...")}
 
  
-  if(crit == "CL2"){crit=2}
-  else if(crit == "maximin"){crit=1}
-  else{crit=4}
+  if(crit == "maximin"){crit=1}
+  else if(crit == "CL2"){crit=2}
+  else{crit=3}
 
   #recall Rcpp compiled StoAUDC function:
   list <- StoAUDC(X0,n,s,q,init="rand",initX=matrix(0),crit,maxiter,hits_ratio)
@@ -70,9 +70,9 @@ AUDC <- function (X0,n,crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
 
 LP<- function(X0=matrix(0),crit="MD2",maxiter=10000,hits_ratio = 0.1,vis=FALSE)
 {
-  if(crit == "CL2"){crit=2}
-  else if(crit == "maximin"){crit=1}
-  else{crit=4}
+  if(crit == "maximin"){crit=1}
+  else if(crit == "CL2"){crit=2}
+  else{crit=3}
   X0 = as.matrix(X0)
   q = max(X0) - min(X0) + 1
   list <- StoLP(X0,q,crit,maxiter,hits_ratio)
