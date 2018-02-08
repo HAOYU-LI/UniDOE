@@ -82,6 +82,10 @@ def find_design_size(url,crit_type="MD2_nq"):
         Level = "Level%20(.*)/"
         Factor = "Level.*/(.*)_"
         Run = "_(.*).txt"
+    elif crit_type == "WD2":
+        Level = "Level%20(.*)/"
+        Factor = "Level.*/(.*)_"
+        Run = "_(.*).txt"
         
     pLevel = re.compile(Level)
     pFactor = re.compile(Factor)
