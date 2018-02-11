@@ -1,0 +1,7 @@
+improving_ratio = 
+
+number of improved design / number of valid design scratched from: http://www.cms-ud.com/UD/UniformDesign.html
+
+=
+
+0.54046997
