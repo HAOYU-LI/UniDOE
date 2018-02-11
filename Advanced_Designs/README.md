@@ -1,8 +1,8 @@
 # Advanced design of experiments
-### date: 08/09/2017
+### date: 02/12/2018
 ### Introduction:
 
-Advanced design of experiments based on centered L2 discrepancy and Mixture L2 discrepancy are uploaded to this repository. Both the old online best designs and new advanced designs are included and separated into different sub-directories. For Latin hypercube designs, the suffix is *_nsn, while for general designs the suffix is *_nsq. In each sub-directories, advanced designs after optimizating process by UniDOE are located in $Advance$ directory and their corresponding discrepancies are located in $Discrepancy$ directory.
+Advanced design of experiments based on centered L2 discrepancy, Mixture L2 discrepancy and Wrap-around L2 discrepancy are uploaded to this repository. Both the old online best designs and new advanced designs are included and separated into different sub-directories. For Latin hypercube designs, the suffix is *_nsn, while for general designs the suffix is *_nsq. In each sub-directories, advanced designs after optimizating process by UniDOE are located in $Advance$ directory and their corresponding discrepancies are located in $Discrepancy$ directory.
 
 The R files to obtain these advanced designs are also included in this repository.  
 
@@ -10,5 +10,5 @@ The R files to obtain these advanced designs are also included in this repositor
 
 ### Naming rules:
 
-All .csv files follow naming rules : [crit_type]\_[run]\_[factor]\_[level].csv 
+All .csv files follow naming rules : [crit_type]\_[run]\_[factor]\_[level].txt 
 
