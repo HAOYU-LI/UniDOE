@@ -37,7 +37,9 @@ UniDOE is currently published to CRAN, users can conveniently install it from R 
 ```
 install.packages("UniDOE")
 ```
-This package will be modified and updated in CRAN directly and this repository may not be the newest version.
+This package will be modified and updated in CRAN directly. This github repository may not be the newest version.
+
+### Install from github:
 
 #### First way
 
@@ -57,7 +59,7 @@ install.packages(file.choose(),repos=NULL)
 Choose UniDOE_0.1.1.zip to install Or install it from GUI.
 
 #### Second Way
-It's more convenient to install UniDOE from github. At first, make sure you installed devtools.
+It's more convenient to install UniDOE using devtools. At first, make sure you installed devtools.
 
 ```
 install.packages("devtools")
