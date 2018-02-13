@@ -31,6 +31,13 @@ language       R
 version.string R version 3.4.1 (2017-06-30)
 nickname       Single Candle 
 ```
+### (Update: Feb, 2018) Install from CRAN:
+
+UniDOE is currently published to CRAN, users can conveniently install it from R Command line:
+```
+install.packages("UniDOE")
+```
+This package will be modified and updated in CRAN directly and this repository may not be the newest version.
 
 #### First way
 
