@@ -2,7 +2,7 @@
 ### Author: Aijun Zhang, Haoyu Li and Zebin Yang
 ### date: 22/08/2017
 ### Depends: 
-32-bit R(>= 3.4.1), Rtools(>=34)
+R(>= 3.4.1), Rtools(>=34)
 ### Imports: 
 Rcpp (>= 0.12.12)
 ### Linking To: 
